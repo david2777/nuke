@@ -12,6 +12,7 @@ A high-performance triplanar projection node utilizing Nuke's BlinkScript engine
 - **High-Quality Sampling**: Includes Linear, Bilinear, and Anisotropic filtering to reduce blur at oblique angles.
 - **Flexible Controls**:
   - Global and per-axis Translate, Rotate, and Scale.
+  - Normal channel rotation and scale.
   - Output controls to view the merged result or isolate specific axes.
   - `Blend Exponent` to control the sharpness of the transition between projections.
   - `Apply X Texture on All Axis` toggle for quick single-texture mapping.

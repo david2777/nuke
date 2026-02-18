@@ -12,7 +12,7 @@ Gizmo {
  blend_expo_control 6
  addUserKnob {4 sampling_control l Sampling t "Selects the texture filtering method.\nLinear: Low quality texture filtering (very fast).\nBilinear: Standard texture filtering (medium fast).\nAnisotropic: Reduces blur at oblique angles (slower)." M {"Linear (Fast)" "Bilinear (Medium)" "Anisotropic (Quality)" "" "" "" "" ""}}
  sampling_control "Anisotropic (Quality)"
- addUserKnob {41 "Triplanar_Anisotropic Filter Size" l "Anisotropic Filter Size" T "BlinkScript1.Triplanar_Anisotropic Filter Size"}
+ addUserKnob {41 "Triplanar_Anisotropic Samples" l "Anisotropic Samples" T "BlinkScript1.Triplanar_Anisotropic Samples"}
  addUserKnob {6 x_all_control l "Apply X Texture on All Axis" t "If enabled, the input connected to the X-axis will be projected onto the Y and Z axes as well, ignoring their individual inputs." +STARTLINE}
  addUserKnob {41 useGPUIfAvailable l "Use GPU if available" T BlinkScript1.useGPUIfAvailable}
  addUserKnob {41 vectorize l "Vectorize on CPU" -STARTLINE T BlinkScript1.vectorize}
@@ -21,21 +21,22 @@ Gizmo {
  addUserKnob {41 "Triplanar_Global Translate" l "Global Translate" T "BlinkScript1.Triplanar_Global Translate"}
  addUserKnob {7 global_rotate_control l "Global Rotate" t "Rotates the texture pattern for all axes at once." R 0 360}
  addUserKnob {41 "Triplanar_Global Scale" l "Global Scale" T "BlinkScript1.Triplanar_Global Scale"}
+ addUserKnob {6 transform_normals_ctrl l "Enable Transform Normals" t "Enable transforming the normals channel" +STARTLINE}
+ transform_normals_ctrl true
+ addUserKnob {41 rotate_n l "Rotate Normals" t "Rotate the normals" T Axis_N.rotate}
+ addUserKnob {41 scale_n l "Scale Normals" t "Scale the normals" T Axis_N.scaling}
  addUserKnob {20 endGroup n -1}
  addUserKnob {20 x_axis_grp l "X Axis" n 1}
- x_axis_grp 0
  addUserKnob {41 "Triplanar_X Axis Translate" l "X Axis Translate" T "BlinkScript1.Triplanar_X Axis Translate"}
  addUserKnob {7 x_axis_rotate_control l "X Axis Rotate" t "Rotates the texture specifically for this axis projection." R 0 360}
  addUserKnob {41 "Triplanar_X Axis Scale" l "X Axis Scale" T "BlinkScript1.Triplanar_X Axis Scale"}
  addUserKnob {20 endGroup_2 l endGroup n -1}
  addUserKnob {20 y_axis_grp l "Y Axis" n 1}
- y_axis_grp 0
  addUserKnob {41 "Triplanar_Y Axis Translate" l "Y Axis Translate" T "BlinkScript1.Triplanar_Y Axis Translate"}
  addUserKnob {7 y_axis_rotate_control l "Y Axis Rotate" t "Rotates the texture specifically for this axis projection." R 0 360}
  addUserKnob {41 "Triplanar_Y Axis Scale" l "Y Axis Scale" T "BlinkScript1.Triplanar_Y Axis Scale"}
  addUserKnob {20 endGroup_3 l endGroup n -1}
  addUserKnob {20 z_axis_grp l "Z Axis" n 1}
- z_axis_grp 0
  addUserKnob {41 "Triplanar_Z Axis Translate" l "Z Axis Translate" T "BlinkScript1.Triplanar_Z Axis Translate"}
  addUserKnob {7 z_axis_rotate_control l "Z Axis Rotate" t "Rotates the texture specifically for this axis projection." R 0 360}
  addUserKnob {41 "Triplanar_Z Axis Scale" l "Z Axis Scale" T "BlinkScript1.Triplanar_Z Axis Scale"}
@@ -73,7 +74,7 @@ Gizmo {
   xpos -480
   ypos -177
  }
-set Nb6f77e00 [stack 0]
+set Na1384d00 [stack 0]
  Shuffle2 {
   fromInput1 {
    {0}
@@ -127,6 +128,7 @@ set Nb6f77e00 [stack 0]
    imported:
    0
    selected:
+   0
    items:
    "root transform/"
   }
@@ -137,8 +139,8 @@ set Nb6f77e00 [stack 0]
   xpos -700
   ypos -33
  }
-set N94969200 [stack 0]
-push $Nb6f77e00
+set Na124d900 [stack 0]
+push $Na1384d00
  Shuffle2 {
   fromInput1 {
    {0}
@@ -161,7 +163,7 @@ push $Nb6f77e00
   xpos -590
   ypos -33
  }
- set Cb90e1700 [stack 0]
+ set Ca165a000 [stack 0]
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -198,6 +200,7 @@ push $Nb6f77e00
    imported:
    0
    selected:
+   0
    items:
    "root transform/"
   }
@@ -220,13 +223,13 @@ push $Nb6f77e00
   xpos -226
   ypos 66
  }
-set N6a2a1800 [stack 0]
+set N9fe00400 [stack 0]
  Dot {
   name Dot4
   xpos -116
   ypos 66
  }
-set N6a2a1c00 [stack 0]
+set N9fe00800 [stack 0]
  Input {
   inputs 0
   name Z_Texture
@@ -234,8 +237,8 @@ set N6a2a1c00 [stack 0]
   ypos 207
   number 3
  }
-push $N94969200
-push $Nb6f77e00
+push $Na124d900
+push $Na1384d00
  Shuffle2 {
   fromInput1 {
    {0}
@@ -250,7 +253,7 @@ push $Nb6f77e00
   xpos -370
   ypos -81
  }
-clone $Cb90e1700 {
+clone $Ca165a000 {
   inputs 2
   xpos -370
   ypos -33
@@ -294,6 +297,7 @@ clone $Cb90e1700 {
    imported:
    0
    selected:
+   0
    items:
    "root transform/"
   }
@@ -318,7 +322,7 @@ clone $Cb90e1700 {
   xpos -150
   ypos 207
  }
-push $N6a2a1800
+push $N9fe00400
  Input {
   inputs 0
   name Y_Texture
@@ -326,8 +330,8 @@ push $N6a2a1800
   ypos 135
   number 2
  }
-push $N94969200
-push $Nb6f77e00
+push $Na124d900
+push $Na1384d00
  Shuffle2 {
   fromInput1 {
    {0}
@@ -342,7 +346,7 @@ push $Nb6f77e00
   xpos -480
   ypos -81
  }
-clone $Cb90e1700 {
+clone $Ca165a000 {
   inputs 2
   xpos -480
   ypos -33
@@ -386,6 +390,7 @@ clone $Cb90e1700 {
    imported:
    0
    selected:
+   0
    items:
    "root transform/"
   }
@@ -410,7 +415,7 @@ clone $Cb90e1700 {
   xpos -260
   ypos 135
  }
-push $N6a2a1c00
+push $N9fe00800
  Dot {
   name Dot2
   xpos -6
@@ -427,34 +432,45 @@ push $N6a2a1c00
   xpos 104
   ypos 42
  }
-set N6a2a0800 [stack 0]
+set N9fe01000 [stack 0]
  Shuffle {
   in P
   name P_Shuffle
   xpos 180
   ypos 39
  }
-set Nb6f76f00 [stack 0]
+set Na114c000 [stack 0]
  Shuffle {
   in N
   name N_Shuffle
   xpos 290
   ypos 39
  }
-push $Nb6f76f00
-push $N6a2a0800
+ ColorMatrix {
+  matrix {
+   
+       {{Axis_N.world_matrix.0} {Axis_N.world_matrix.1} {Axis_N.world_matrix.2}}
+       {{Axis_N.world_matrix.4} {Axis_N.world_matrix.5} {Axis_N.world_matrix.6}}
+       {{Axis_N.world_matrix.8} {Axis_N.world_matrix.9} {Axis_N.world_matrix.10}}
+  }
+  name Transform_N
+  xpos 290
+  ypos 87
+  disable {{"! parent.transform_normals_ctrl"}}
+ }
+push $Na114c000
+push $N9fe01000
  BlinkScript {
   inputs 6
   kernelSourceFile F:/personal/triplanar/triplanar.blink
-  recompileCount 2
-  KernelDescription "3 \"Triplanar\" iterate pixelWise c2b8d84ecec97fbdab190dbcb625556372e10195afc99fff71e5ec78b06b0b37 7 \"imBeauty\" Read Point \"imWorldPos\" Read Ranged2D \"imWorldNormal\" Read Point \"imTextureX\" Read Random \"imTextureY\" Read Random \"imTextureZ\" Read Random \"dst\" Write Point 18 \"Output Axis\" Int 1 AwAAAA== \"Premult\" Bool 1 AQ== \"Apply Texture Alpha\" Bool 1 AA== \"Global Translate\" Float 2 AAAAAAAAAAA= \"Global Scale\" Float 1 AACAPw== \"Global Rotate\" Float 1 AAAAAA== \"Blend Exponent\" Float 1 AACAPw== \"Filter Mode\" Int 1 AAAAAA== \"Anisotropic Filter Size\" Int 1 BAAAAA== \"X Axis Translate\" Float 2 AAAAAAAAAAA= \"X Axis Rotate\" Float 1 AAAAAA== \"X Axis Scale\" Float 1 AACAPw== \"Y Axis Translate\" Float 2 AAAAAAAAAAA= \"Y Axis Rotate\" Float 1 AAAAAA== \"Y Axis Scale\" Float 1 AACAPw== \"Z Axis Translate\" Float 2 AAAAAAAAAAA= \"Z Axis Rotate\" Float 1 AAAAAA== \"Z Axis Scale\" Float 1 AACAPw== 18 \"axisOutput\" 1 1 Default \"premult\" 1 1 Default \"useTextureAlpha\" 1 1 Default \"offsetGlobal\" 2 1 Default \"scaleGlobal\" 1 1 Default \"rotateAngleGlobal\" 1 1 Default \"blendExponent\" 1 1 Default \"filterMode\" 1 1 Default \"anisotropicFilterSize\" 1 1 Default \"offsetX\" 2 1 Default \"angleX\" 1 1 Default \"scaleX\" 1 1 Default \"offsetY\" 2 1 Default \"angleY\" 1 1 Default \"scaleY\" 1 1 Default \"offsetZ\" 2 1 Default \"angleZ\" 1 1 Default \"scaleZ\" 1 1 Default 12 \"imWorldPosrangeMin\" Int 2 1 AAAAAAAAAAA= \"imWorldPosrangeMax\" Int 2 1 AAAAAAAAAAA= \"kWeightThreshold\" Float 1 1 AAAAAA== \"textureX_Size\" Int 2 1 AAAAAAAAAAA= \"textureY_Size\" Int 2 1 AAAAAAAAAAA= \"textureZ_Size\" Int 2 1 AAAAAAAAAAA= \"rotateX_Sin\" Float 1 1 AAAAAA== \"rotateX_Cos\" Float 1 1 AAAAAA== \"rotateY_Sin\" Float 1 1 AAAAAA== \"rotateY_Cos\" Float 1 1 AAAAAA== \"rotateZ_Sin\" Float 1 1 AAAAAA== \"rotateZ_Cos\" Float 1 1 AAAAAA=="
-  kernelSource "kernel Triplanar : public ImageComputationKernel <ePixelWise>\n\{\n    Image<eRead> imBeauty;\n    Image<eRead, eAccessRanged2D, eEdgeClamped> imWorldPos;\n    Image<eRead> imWorldNormal;\n    Image<eRead, eAccessRandom, eEdgeClamped> imTextureX;\n    Image<eRead, eAccessRandom, eEdgeClamped> imTextureY;\n    Image<eRead, eAccessRandom, eEdgeClamped> imTextureZ;\n    Image<eWrite> dst;\n\n    param:\n        // Global params\n        int axisOutput;\n        bool premult;\n        bool useTextureAlpha;\n\n        float2 offsetGlobal;\n        float scaleGlobal;\n        float rotateAngleGlobal;\n        float blendExponent;\n        int filterMode;\n        int anisotropicFilterSize;\n\n        // Per axis params\n        float2 offsetX;\n        float angleX;\n        float scaleX;\n\n        float2 offsetY;\n        float angleY;\n        float scaleY;\n\n        float2 offsetZ;\n        float angleZ;\n        float scaleZ;\n\n    local:\n        float kWeightThreshold;\n\n        int2 textureX_Size;\n        int2 textureY_Size;\n        int2 textureZ_Size;\n\n        float rotateX_Sin;\n        float rotateX_Cos;\n\n        float rotateY_Sin;\n        float rotateY_Cos;\n\n        float rotateZ_Sin;\n        float rotateZ_Cos;\n\n    void define() \{\n        defineParam(premult, \"Premult\", true);\n        defineParam(useTextureAlpha, \"Apply Texture Alpha\", false);\n        defineParam(axisOutput, \"Output Axis\", 3);\n\n        defineParam(offsetGlobal, \"Global Translate\", float2(0.0f, 0.0f));\n        defineParam(rotateAngleGlobal, \"Global Rotate\", 0.0f);\n        defineParam(scaleGlobal, \"Global Scale\", 1.0f);\n\n        defineParam(blendExponent, \"Blend Exponent\", 1.0f);\n        defineParam(filterMode, \"Filter Mode\", 0);\n        defineParam(anisotropicFilterSize, \"Anisotropic Filter Size\", 4);\n\n        defineParam(offsetX, \"X Axis Translate\", float2(0.0f, 0.0f));\n        defineParam(angleX, \"X Axis Rotate\", 0.0f);\n        defineParam(scaleX, \"X Axis Scale\", 1.0f);\n\n        defineParam(offsetY, \"Y Axis Translate\", float2(0.0f, 0.0f));\n        defineParam(angleY, \"Y Axis Rotate\", 0.0f);\n        defineParam(scaleY, \"Y Axis Scale\", 1.0f);\n\n        defineParam(offsetZ, \"Z Axis Translate\", float2(0.0f, 0.0f));\n        defineParam(angleZ, \"Z Axis Rotate\", 0.0f);\n        defineParam(scaleZ, \"Z Axis Scale\", 1.0f);\n    \}\n\n    float angleToRad(float angle) \{\n        return angle * 3.1415926535f / 180.0f;\n    \}\n\n    void init() \{\n        // Define a lower threshold for the weights at which point it rounds down to 0\n        kWeightThreshold = 0.0001f;\n\n        // Ensure filter mode is between 0 and 2\n        filterMode = max(filterMode, 0);\n        filterMode = min(filterMode, 2);\n\n        // Set our ranged access to one pixel down and one pixel right for anisotropic filtering\n        imWorldPos.setRange(0, 1, 0, 1);\n\n        // Get texture widths and heights to perform UV to pixel space conversions\n        textureX_Size = int2(imTextureX.bounds.height(), imTextureX.bounds.width());\n        textureY_Size = int2(imTextureY.bounds.height(), imTextureY.bounds.width());\n        textureZ_Size = int2(imTextureZ.bounds.height(), imTextureZ.bounds.width());\n\n        // Setup rotations, sin and cos are expecting radians\n        float angleRad = angleToRad(angleX + rotateAngleGlobal);\n        rotateX_Sin = sin(angleRad);\n        rotateX_Cos = cos(angleRad);\n\n        angleRad = angleToRad(angleY + rotateAngleGlobal);\n        rotateY_Sin = sin(angleRad);\n        rotateY_Cos = cos(angleRad);\n\n        angleRad = angleToRad(angleZ + rotateAngleGlobal);\n        rotateZ_Sin = sin(angleRad);\n        rotateZ_Cos = cos(angleRad);\n\n        // Calculate offsets in pixel space\n        offsetX = (offsetX + offsetGlobal) / textureX_Size;\n        offsetY = (offsetY + offsetGlobal) / textureY_Size;\n        offsetZ = (offsetZ + offsetGlobal) / textureZ_Size;\n\n        // Calculate scales\n        scaleX = scaleX * scaleGlobal;\n        scaleY = scaleY * scaleGlobal;\n        scaleZ = scaleZ * scaleGlobal;\n    \}\n\n    // Compute the weights based on the normal data\n    float3 computeWeights(float4 normal) \{\n        // Get absolute value of the normal data\n        float4 absNormal = fabs(normal);\n\n        // Check that there is any data on this sample\n        if ((absNormal.x == 0.0f) and (absNormal.y == 0.0f) and (absNormal.z == 0.0f)) \{\n            return float3(0.0f);\n        \}\n\n        // Apply exponent\n        float weightX = pow(absNormal.x, blendExponent);\n        float weightY = pow(absNormal.y, blendExponent);\n        float weightZ = pow(absNormal.z, blendExponent);\n\n        // Normalize weights\n        float total = weightX + weightY + weightZ;\n        weightX = weightX / total;\n        weightY = weightY / total;\n        weightZ = weightZ / total;\n\n        // Cull weights below the lower weight threshold, this is more of a taste thing but I\n        // don't like seeing tiny values when inspecting the result.\n        if (weightX < kWeightThreshold) \{\n            weightX = 0.0f;\n        \} if (weightY < kWeightThreshold) \{\n            weightY = 0.0f;\n        \} if (weightZ < kWeightThreshold) \{\n            weightZ = 0.0f;\n        \}\n\n        // Return our weights in the form of a float3\n        return float3(weightX, weightY, weightZ);\n    \}\n    \n    // Calculate UV coordinates from two World Pos values and an axis where 0 = X, 1 = Y, and 2 = Z.\n    float2 computeUVs(float x, float y, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n\n        float scaleLocal;\n        float2 offsetLocal;\n        float angleCosLocal;\n        float angleSinLocal;\n        if (axis == 0) \{\n            scaleLocal = scaleX;\n            offsetLocal = offsetX;\n            angleCosLocal = rotateX_Cos;\n            angleSinLocal = rotateX_Sin;\n        \} if (axis == 1) \{\n            scaleLocal = scaleY;\n            offsetLocal = offsetY;\n            angleCosLocal = rotateY_Cos;\n            angleSinLocal = rotateY_Sin;\n        \} if (axis == 2) \{\n            scaleLocal = scaleZ;\n            offsetLocal = offsetZ;\n            angleCosLocal = rotateZ_Cos;\n            angleSinLocal = rotateZ_Sin;\n        \}\n\n        // Pack our UVs into a float2 vector, applying the scale and offset\n        float2 uv = float2((x * scaleLocal), (y * scaleLocal)) - offsetLocal; \n\n        // Rotate UVs\n        uv = float2(uv.x * angleCosLocal - uv.y * angleSinLocal, uv.x * angleSinLocal + uv.y * angleCosLocal);\n\n        // Extract the fractional range of each UV to allow for tiling using a basic fract function\n        uv = float2((uv.x - floor(uv.x)), (uv.y - floor(uv.y)));\n\n        return uv;\n    \}\n\n    // Accounts for UV wrapping by adjusting differential values when they go beyond 0.5 in magnitude\n    float wrappedDiff(float a, float b) \{\n        float diff = a - b;\n        if (diff > 0.5f) \{\n            diff -= 1.0f;\n        \} if (diff < -0.5f) \{\n            diff += 1.0f;\n        \}\n        return diff;\n    \}\n\n    // Accounts for UV wrapping by adjusting differential values when they go beyond 0.5 in magnitude\n    float2 wrappedDiff2(float2 uv1, float2 uv2) \{\n        return float2(wrappedDiff(uv1.x, uv2.x), wrappedDiff(uv1.y, uv2.y));\n    \}\n\n    // Calculate the derivatives for a one pixel offset of the position data\n    float2 computeUVDerivatives(float2 uv, float xOffset, float yOffset, int axis) \{\n        float2 uvOffset = computeUVs(xOffset, yOffset, axis);\n        return wrappedDiff2(uv, uvOffset);\n    \}\n\n    // Sample the texture using a linear or point method, fast but noisy\n    float4 sampleLinear(float2 uv, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n\n        if (axis == 0) \{\n            uv = uv * textureX_Size;\n            return imTextureX(uv.x, uv.y);\n        \} if (axis == 1) \{\n            uv = uv * textureY_Size;\n            return imTextureY(uv.x, uv.y);\n        \} else \{\n            uv = uv * textureZ_Size;\n            return imTextureZ(uv.x, uv.y);\n        \}\n\n    \}\n\n    // Sample the texture using a bilinear method, slower but higher quality\n    float4 sampleBilinear(float2 uv, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n\n        if (axis == 0) \{\n            uv = uv * textureX_Size;\n            return bilinear(imTextureX, uv.x, uv.y);\n        \} if (axis == 1) \{\n            uv = uv * textureY_Size;\n            return bilinear(imTextureY, uv.x, uv.y);\n        \} else \{\n            uv = uv * textureZ_Size;\n            return bilinear(imTextureZ, uv.x, uv.y);\n        \}\n\n    \}\n\n    // Sample the texture using anisotropic method, slowest but highest quality, especially on oblique angles\n    float4 sampleAnisotropic(float2 uv, float4 posRight, float4 posDown, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n\n        float2 uv_RightD = 0.0f;\n        float2 uv_DownD = 0.0f;\n\n        if (axis == 0) \{\n            uv_RightD = computeUVDerivatives(uv, posRight.y, posRight.z, 0);\n            uv_DownD = computeUVDerivatives(uv, posDown.y, posDown.z, 0);\n        \} if (axis == 1) \{\n            uv_RightD = computeUVDerivatives(uv, posRight.x, posRight.z, 1);\n            uv_DownD = computeUVDerivatives(uv, posDown.x, posDown.z, 1);\n        \} if (axis == 2) \{\n            uv_RightD = computeUVDerivatives(uv, posRight.x, posRight.y, 2);\n            uv_DownD = computeUVDerivatives(uv, posDown.x, posDown.y, 2);\n        \}\n\n        // Get the length of the derivative\n        float len_uv_RightD = length(uv_RightD);\n        float len_uv_DownD = length(uv_DownD);\n\n        // Find the dominant derivative (the direction with the greater change between pixels)\n        float2 majorDir;\n        float maxDerivative;\n        if (len_uv_RightD > len_uv_DownD) \{\n            majorDir = normalize(uv_RightD);\n            maxDerivative = len_uv_RightD;\n        \} else \{\n            majorDir = normalize(uv_DownD);\n            maxDerivative = len_uv_DownD;\n        \}\n\n        // Calculate our step size, center offset, and initialize our output\n        float step = maxDerivative / (anisotropicFilterSize - 1);\n        float centerOffset = (anisotropicFilterSize - 1) * 0.5;\n        float4 result = float4(0.0f);\n\n        // Step through our sample count and accumulate linear samples on each iteration, slowly moving in the direction of the offset \n        for (int i = 0; i < anisotropicFilterSize; i++) \{\n            float offset = (i - centerOffset) * step;\n            float2 sampleUV = uv + majorDir * offset;\n            float4 sampleColor = float4(0.0f);\n            if (axis == 0) \{\n                sampleUV = sampleUV * textureX_Size;\n                sampleColor = imTextureX(sampleUV.x, sampleUV.y);\n            \} if (axis == 1) \{\n                sampleUV = sampleUV * textureY_Size;\n                sampleColor = imTextureY(sampleUV.x, sampleUV.y);\n            \} if (axis == 2) \{\n                sampleUV = sampleUV * textureZ_Size;\n                sampleColor = imTextureZ(sampleUV.x, sampleUV.y);\n            \}\n            result = result + sampleColor;\n        \}\n\n        // Normalize our result\n        return result / anisotropicFilterSize;\n    \}\n\n    // The actual kernel\n    void process() \{\n        // Read image data inputs\n        float4 pos = imWorldPos(0, 0);\n        float4 normal = imWorldNormal();\n\n        // Compute weights\n        float3 weights = computeWeights(normal);\n\n        // Calculate UVs\n        float2 uvX = computeUVs(pos.y, pos.z, 0);\n        float2 uvY = computeUVs(pos.x, pos.z, 1);\n        float2 uvZ = computeUVs(pos.x, pos.y, 2);\n\n        float4 texSampleX = float4(0.0f);\n        float4 texSampleY = float4(0.0f);\n        float4 texSampleZ = float4(0.0f);\n\n        if (filterMode == 0) \{ // Linear Sampling\n            texSampleX = sampleLinear(uvX, 0);\n            texSampleY = sampleLinear(uvY, 1);\n            texSampleZ = sampleLinear(uvZ, 2);\n        \} if (filterMode == 1) \{ // Bilinear Sampling\n            texSampleX = sampleBilinear(uvX, 0);\n            texSampleY = sampleBilinear(uvY, 1);\n            texSampleZ = sampleBilinear(uvZ, 2);\n        \} if (filterMode == 2) \{ // Anisotropic Sampling\n            // Get the position data for the right and down pixels\n            float4 posRight = imWorldPos(1, 0);\n            float4 posDown = imWorldPos(0, 1);\n\n            // Gather the samples\n            texSampleX = sampleAnisotropic(uvX, posRight, posDown, 0);\n            texSampleY = sampleAnisotropic(uvY, posRight, posDown, 1);\n            texSampleZ = sampleAnisotropic(uvZ, posRight, posDown, 2);\n        \}\n\n        // Compute the output by multiplying the texture sample by the output weights\n        float4 output = float4(0.0f);\n        if (axisOutput <= 0) \{    // X Axis Only\n            output = (texSampleX * weights.x);\n            if (! useTextureAlpha) \{\n                output.w = weights.x;\n            \}\n        \} if (axisOutput == 1) \{  // Y Axis Only\n            output = (texSampleY * weights.y);\n            if (! useTextureAlpha) \{\n                output.w = weights.y;\n            \}\n        \} if (axisOutput == 2) \{  // Z Axis Only\n            output = (texSampleZ * weights.z);\n            if (! useTextureAlpha) \{\n                output.w = weights.z;\n            \}\n        \} if (axisOutput >= 3) \{  // All Axis\n            output = (texSampleX * weights.x) + (texSampleY * weights.y) + (texSampleZ * weights.z);\n            // Compute alpha, I'm not fully normalizing weights so we just compute a rough alpha here\n            // which we can premult below\n            if ((! useTextureAlpha) && (output.x + output.y + output.z) > 0.0f) \{\n                output.w = 1.0f;\n            \}\n        \}\n\n        // Premult\n        if (premult) \{\n            // Read beauty and mult by original alpha\n            float4 beauty = imBeauty();\n            output = output * beauty.w;\n\n            // If applying by the texture alpha, mult by that as well\n            if (useTextureAlpha) \{\n                float alpha = output.w;\n                output = output * alpha;\n                output.w = alpha;\n            \}\n        \}\n\n        // Write to the output\n        dst() = output;\n    \}\n\};"
+  recompileCount 4
+  KernelDescription "3 \"Triplanar\" iterate pixelWise 54682e20acdb94b2b5c895f62d3a089a8cd30585615f48910674868fe9f0c020 7 \"imBeauty\" Read Point \"imWorldPos\" Read Ranged2D \"imWorldNormal\" Read Point \"imTextureX\" Read Random \"imTextureY\" Read Random \"imTextureZ\" Read Random \"dst\" Write Point 18 \"Output Axis\" Int 1 AwAAAA== \"Premult\" Bool 1 AQ== \"Apply Texture Alpha\" Bool 1 AA== \"Global Translate\" Float 2 AAAAAAAAAAA= \"Global Scale\" Float 1 AACAPw== \"Global Rotate\" Float 1 AAAAAA== \"Blend Exponent\" Float 1 AACAPw== \"Filter Mode\" Int 1 AAAAAA== \"Anisotropic Samples\" Int 1 CAAAAA== \"X Axis Translate\" Float 2 AAAAAAAAAAA= \"X Axis Rotate\" Float 1 AAAAAA== \"X Axis Scale\" Float 1 AACAPw== \"Y Axis Translate\" Float 2 AAAAAAAAAAA= \"Y Axis Rotate\" Float 1 AAAAAA== \"Y Axis Scale\" Float 1 AACAPw== \"Z Axis Translate\" Float 2 AAAAAAAAAAA= \"Z Axis Rotate\" Float 1 AAAAAA== \"Z Axis Scale\" Float 1 AACAPw== 18 \"axisOutput\" 1 1 Default \"premult\" 1 1 Default \"useTextureAlpha\" 1 1 Default \"offsetGlobal\" 2 1 Default \"scaleGlobal\" 1 1 Default \"rotateAngleGlobal\" 1 1 Default \"blendExponent\" 1 1 Default \"filterMode\" 1 1 Default \"anisotropicSampleCount\" 1 1 Default \"offsetX\" 2 1 Default \"angleX\" 1 1 Default \"scaleX\" 1 1 Default \"offsetY\" 2 1 Default \"angleY\" 1 1 Default \"scaleY\" 1 1 Default \"offsetZ\" 2 1 Default \"angleZ\" 1 1 Default \"scaleZ\" 1 1 Default 12 \"imWorldPosrangeMin\" Int 2 1 AAAAAAAAAAA= \"imWorldPosrangeMax\" Int 2 1 AAAAAAAAAAA= \"kWeightThreshold\" Float 1 1 AAAAAA== \"textureX_Size\" Int 2 1 AAAAAAAAAAA= \"textureY_Size\" Int 2 1 AAAAAAAAAAA= \"textureZ_Size\" Int 2 1 AAAAAAAAAAA= \"rotateX_Sin\" Float 1 1 AAAAAA== \"rotateX_Cos\" Float 1 1 AAAAAA== \"rotateY_Sin\" Float 1 1 AAAAAA== \"rotateY_Cos\" Float 1 1 AAAAAA== \"rotateZ_Sin\" Float 1 1 AAAAAA== \"rotateZ_Cos\" Float 1 1 AAAAAA=="
+  kernelSource "kernel Triplanar : public ImageComputationKernel <ePixelWise> \{\n    Image<eRead> imBeauty;\n    Image<eRead, eAccessRanged2D, eEdgeClamped> imWorldPos;\n    Image<eRead> imWorldNormal;\n    Image<eRead, eAccessRandom, eEdgeClamped> imTextureX;\n    Image<eRead, eAccessRandom, eEdgeClamped> imTextureY;\n    Image<eRead, eAccessRandom, eEdgeClamped> imTextureZ;\n    Image<eWrite> dst;\n\n    param:\n        // Global params\n        int axisOutput;\n        bool premult;\n        bool useTextureAlpha;\n\n        // Global transform params\n        float2 offsetGlobal;\n        float scaleGlobal;\n        float rotateAngleGlobal;\n\n        // Blend and filtering params\n        float blendExponent;\n        int filterMode;\n        int anisotropicSampleCount;\n\n        // Per axis transform params\n        float2 offsetX;\n        float angleX;\n        float scaleX;\n\n        float2 offsetY;\n        float angleY;\n        float scaleY;\n\n        float2 offsetZ;\n        float angleZ;\n        float scaleZ;\n\n    local:\n        // Constant lower weight threshold to remove tiny values\n        float kWeightThreshold;\n\n        // Cached texture sizes for UV to pixel space conversions\n        int2 textureX_Size;\n        int2 textureY_Size;\n        int2 textureZ_Size;\n\n        // Pre-calculated sin and cos values for rotations\n        float rotateX_Sin;\n        float rotateX_Cos;\n\n        float rotateY_Sin;\n        float rotateY_Cos;\n\n        float rotateZ_Sin;\n        float rotateZ_Cos;\n\n    void define() \{\n        // Define parameters in node panel \n        defineParam(premult, \"Premult\", true);\n        defineParam(useTextureAlpha, \"Apply Texture Alpha\", false);\n        defineParam(axisOutput, \"Output Axis\", 3);\n\n        defineParam(offsetGlobal, \"Global Translate\", float2(0.0f, 0.0f));\n        defineParam(rotateAngleGlobal, \"Global Rotate\", 0.0f);\n        defineParam(scaleGlobal, \"Global Scale\", 1.0f);\n\n        defineParam(blendExponent, \"Blend Exponent\", 1.0f);\n        defineParam(filterMode, \"Filter Mode\", 0);\n        defineParam(anisotropicSampleCount, \"Anisotropic Samples\", 8);\n\n        defineParam(offsetX, \"X Axis Translate\", float2(0.0f, 0.0f));\n        defineParam(angleX, \"X Axis Rotate\", 0.0f);\n        defineParam(scaleX, \"X Axis Scale\", 1.0f);\n\n        defineParam(offsetY, \"Y Axis Translate\", float2(0.0f, 0.0f));\n        defineParam(angleY, \"Y Axis Rotate\", 0.0f);\n        defineParam(scaleY, \"Y Axis Scale\", 1.0f);\n\n        defineParam(offsetZ, \"Z Axis Translate\", float2(0.0f, 0.0f));\n        defineParam(angleZ, \"Z Axis Rotate\", 0.0f);\n        defineParam(scaleZ, \"Z Axis Scale\", 1.0f);\n    \}\n\n    // Convert degrees to radians\n    float angleToRad(float angle) \{\n        return angle * 3.1415926535f / 180.0f;\n    \}\n\n    void init() \{\n        // Define a lower threshold for the weights at which point it rounds down to 0\n        kWeightThreshold = 0.0001f;\n\n        // Ensure filter mode is between 0 and 2\n        filterMode = max(filterMode, 0);\n        filterMode = min(filterMode, 2);\n\n        // Set our ranged access to one pixel down and one pixel right for anisotropic filtering\n        imWorldPos.setRange(0, 1, 0, 1);\n\n        // Get texture widths and heights to perform UV to pixel space conversions\n        textureX_Size = int2(imTextureX.bounds.height(), imTextureX.bounds.width());\n        textureY_Size = int2(imTextureY.bounds.height(), imTextureY.bounds.width());\n        textureZ_Size = int2(imTextureZ.bounds.height(), imTextureZ.bounds.width());\n\n        // Setup rotations, sin and cos are expecting radians\n        float angleRad = angleToRad(angleX + rotateAngleGlobal);\n        rotateX_Sin = sin(angleRad);\n        rotateX_Cos = cos(angleRad);\n\n        angleRad = angleToRad(angleY + rotateAngleGlobal);\n        rotateY_Sin = sin(angleRad);\n        rotateY_Cos = cos(angleRad);\n\n        angleRad = angleToRad(angleZ + rotateAngleGlobal);\n        rotateZ_Sin = sin(angleRad);\n        rotateZ_Cos = cos(angleRad);\n\n        // Calculate offsets in pixel space\n        offsetX = (offsetX + offsetGlobal) / textureX_Size;\n        offsetY = (offsetY + offsetGlobal) / textureY_Size;\n        offsetZ = (offsetZ + offsetGlobal) / textureZ_Size;\n\n        // Calculate scales\n        scaleX = scaleX * scaleGlobal;\n        scaleY = scaleY * scaleGlobal;\n        scaleZ = scaleZ * scaleGlobal;\n    \}\n\n    // Compute the weights based on the normal data\n    float3 computeWeights(float4 normal) \{\n        // Get absolute value of the normal data\n        float4 absNormal = fabs(normal);\n\n        // Check that there is any data on this sample\n        if ((absNormal.x == 0.0f) and (absNormal.y == 0.0f) and (absNormal.z == 0.0f)) \{\n            return float3(0.0f);\n        \}\n\n        // Apply exponent\n        float weightX = pow(absNormal.x, blendExponent);\n        float weightY = pow(absNormal.y, blendExponent);\n        float weightZ = pow(absNormal.z, blendExponent);\n\n        // Normalize weights\n        float total = weightX + weightY + weightZ;\n        weightX = weightX / total;\n        weightY = weightY / total;\n        weightZ = weightZ / total;\n\n        // Cull weights below the lower weight threshold, this is more of a preference but I\n        // don't like seeing tiny values when inspecting the result.\n        if (weightX < kWeightThreshold) \{\n            weightX = 0.0f;\n        \} if (weightY < kWeightThreshold) \{\n            weightY = 0.0f;\n        \} if (weightZ < kWeightThreshold) \{\n            weightZ = 0.0f;\n        \}\n\n        // Return our weights in the form of a float3\n        return float3(weightX, weightY, weightZ);\n    \}\n\n    // Calculate UV coordinates from two World Pos values and an axis where 0 = X, 1 = Y, and 2 = Z.\n    float2 computeUVs(float x, float y, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n\n        // Get the scale, offset, and rotation for the given axis\n        float scaleLocal;\n        float2 offsetLocal;\n        float angleCosLocal;\n        float angleSinLocal;\n        if (axis == 0) \{\n            scaleLocal = scaleX;\n            offsetLocal = offsetX;\n            angleCosLocal = rotateX_Cos;\n            angleSinLocal = rotateX_Sin;\n        \} if (axis == 1) \{\n            scaleLocal = scaleY;\n            offsetLocal = offsetY;\n            angleCosLocal = rotateY_Cos;\n            angleSinLocal = rotateY_Sin;\n        \} if (axis == 2) \{\n            scaleLocal = scaleZ;\n            offsetLocal = offsetZ;\n            angleCosLocal = rotateZ_Cos;\n            angleSinLocal = rotateZ_Sin;\n        \}\n\n        // Pack our UVs into a float2 vector, applying the scale and offset\n        float2 uv = float2((x * scaleLocal), (y * scaleLocal)) - offsetLocal; \n\n        // Rotate UVs\n        uv = float2(uv.x * angleCosLocal - uv.y * angleSinLocal, uv.x * angleSinLocal + uv.y * angleCosLocal);\n\n        // Extract the fractional range of each UV to allow for tiling using a basic fract function\n        uv = float2((uv.x - floor(uv.x)), (uv.y - floor(uv.y)));\n\n        return uv;\n    \}\n\n    // Accounts for UV wrapping by adjusting differential values when they go beyond 0.5 in magnitude\n    float wrappedDiff(float a, float b) \{\n        float diff = a - b;\n        if (diff > 0.5f) \{\n            diff -= 1.0f;\n        \} if (diff < -0.5f) \{\n            diff += 1.0f;\n        \}\n        return diff;\n    \}\n\n    // Accounts for UV wrapping by adjusting differential values when they go beyond 0.5 in magnitude\n    float2 wrappedDiff2(float2 uv1, float2 uv2) \{\n        return float2(wrappedDiff(uv1.x, uv2.x), wrappedDiff(uv1.y, uv2.y));\n    \}\n\n    // Calculate the derivatives for a one pixel offset of the position data\n    float2 computeUVDerivatives(float2 uv, float xOffset, float yOffset, int axis) \{\n        float2 uvOffset = computeUVs(xOffset, yOffset, axis);\n        return wrappedDiff2(uv, uvOffset);\n    \}\n\n    // Sample the texture using a linear or point method, fast but noisy\n    float4 sampleLinear(float2 uv, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n\n        if (axis == 0) \{\n            uv = uv * textureX_Size;\n            return imTextureX(uv.x, uv.y);\n        \} if (axis == 1) \{\n            uv = uv * textureY_Size;\n            return imTextureY(uv.x, uv.y);\n        \} else \{\n            uv = uv * textureZ_Size;\n            return imTextureZ(uv.x, uv.y);\n        \}\n\n    \}\n\n    // Sample the texture using a bilinear method, slower but higher quality\n    float4 sampleBilinear(float2 uv, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n\n        if (axis == 0) \{\n            uv = uv * textureX_Size;\n            return bilinear(imTextureX, uv.x, uv.y);\n        \} if (axis == 1) \{\n            uv = uv * textureY_Size;\n            return bilinear(imTextureY, uv.x, uv.y);\n        \} else \{\n            uv = uv * textureZ_Size;\n            return bilinear(imTextureZ, uv.x, uv.y);\n        \}\n\n    \}\n\n    // Sample the texture using anisotropic method, slowest but highest quality, especially on oblique angles\n    float4 sampleAnisotropic(float2 uv, float4 posRight, float4 posDown, int axis) \{\n        axis = max(axis, 0);\n        axis = min(axis, 2);\n        \n        // Compute the UV derivatives for the right and down vectors\n        float2 uv_RightD = 0.0f;\n        float2 uv_DownD = 0.0f;\n\n        if (axis == 0) \{\n            uv_RightD = computeUVDerivatives(uv, posRight.y, posRight.z, 0);\n            uv_DownD = computeUVDerivatives(uv, posDown.y, posDown.z, 0);\n        \} if (axis == 1) \{\n            uv_RightD = computeUVDerivatives(uv, posRight.x, posRight.z, 1);\n            uv_DownD = computeUVDerivatives(uv, posDown.x, posDown.z, 1);\n        \} if (axis == 2) \{\n            uv_RightD = computeUVDerivatives(uv, posRight.x, posRight.y, 2);\n            uv_DownD = computeUVDerivatives(uv, posDown.x, posDown.y, 2);\n        \}\n\n        // Get the length of the derivative\n        float len_uv_RightD = length(uv_RightD);\n        float len_uv_DownD = length(uv_DownD);\n\n        // Find the dominant derivative (the direction with the greater change between pixels)\n        float2 majorDir;\n        float maxDerivative;\n        if (len_uv_RightD > len_uv_DownD) \{\n            majorDir = normalize(uv_RightD);\n            maxDerivative = len_uv_RightD;\n        \} else \{\n            majorDir = normalize(uv_DownD);\n            maxDerivative = len_uv_DownD;\n        \}\n\n        // Calculate our step size, center offset, and initialize our output\n        float step = maxDerivative / (anisotropicSampleCount - 1);\n        float centerOffset = (anisotropicSampleCount - 1) * 0.5;\n        float4 result = float4(0.0f);\n\n        // Step through our sample count and accumulate linear samples on each iteration, slowly moving in the direction of the offset \n        for (int i = 0; i < anisotropicSampleCount; i++) \{\n            float offset = (i - centerOffset) * step;\n            float2 sampleUV = uv + majorDir * offset;\n            float4 sampleColor = float4(0.0f);\n            if (axis == 0) \{\n                sampleUV = sampleUV * textureX_Size;\n                sampleColor = imTextureX(sampleUV.x, sampleUV.y);\n            \} if (axis == 1) \{\n                sampleUV = sampleUV * textureY_Size;\n                sampleColor = imTextureY(sampleUV.x, sampleUV.y);\n            \} if (axis == 2) \{\n                sampleUV = sampleUV * textureZ_Size;\n                sampleColor = imTextureZ(sampleUV.x, sampleUV.y);\n            \}\n            result = result + sampleColor;\n        \}\n\n        // Normalize our result\n        return result / anisotropicSampleCount;\n    \}\n\n    // The actual kernel\n    void process() \{\n        // Read image data inputs\n        float4 pos = imWorldPos(0, 0);\n        float4 normal = imWorldNormal();\n\n        // Compute weights\n        float3 weights = computeWeights(normal);\n\n        // Calculate UVs\n        float2 uvX = computeUVs(pos.y, pos.z, 0);\n        float2 uvY = computeUVs(pos.x, pos.z, 1);\n        float2 uvZ = computeUVs(pos.x, pos.y, 2);\n\n        float4 texSampleX = float4(0.0f);\n        float4 texSampleY = float4(0.0f);\n        float4 texSampleZ = float4(0.0f);\n\n        if (filterMode == 0) \{ // Linear Sampling\n            texSampleX = sampleLinear(uvX, 0);\n            texSampleY = sampleLinear(uvY, 1);\n            texSampleZ = sampleLinear(uvZ, 2);\n        \} if (filterMode == 1) \{ // Bilinear Sampling\n            texSampleX = sampleBilinear(uvX, 0);\n            texSampleY = sampleBilinear(uvY, 1);\n            texSampleZ = sampleBilinear(uvZ, 2);\n        \} if (filterMode == 2) \{ // Anisotropic Sampling\n            // Get the position data for the right and down pixels\n            float4 posRight = imWorldPos(1, 0);\n            float4 posDown = imWorldPos(0, 1);\n\n            // Gather the samples\n            texSampleX = sampleAnisotropic(uvX, posRight, posDown, 0);\n            texSampleY = sampleAnisotropic(uvY, posRight, posDown, 1);\n            texSampleZ = sampleAnisotropic(uvZ, posRight, posDown, 2);\n        \}\n\n        // Compute the output by multiplying the texture sample by the output weights\n        float4 output = float4(0.0f);\n        if (axisOutput <= 0) \{ // X Axis Only\n            output = (texSampleX * weights.x);\n            if (! useTextureAlpha) \{\n                output.w = weights.x;\n            \}\n        \} if (axisOutput == 1) \{ // Y Axis Only\n            output = (texSampleY * weights.y);\n            if (! useTextureAlpha) \{\n                output.w = weights.y;\n            \}\n        \} if (axisOutput == 2) \{ // Z Axis Only\n            output = (texSampleZ * weights.z);\n            if (! useTextureAlpha) \{\n                output.w = weights.z;\n            \}\n        \} if (axisOutput >= 3) \{ // All Axis\n            output = (texSampleX * weights.x) + (texSampleY * weights.y) + (texSampleZ * weights.z);\n            // Compute alpha, we're not fully normalizing weights so we just compute a rough alpha here\n            // which we can multiply by below\n            if ((! useTextureAlpha) && (output.x + output.y + output.z) > 0.0f) \{\n                output.w = 1.0f;\n            \}\n        \}\n\n        // Premult\n        if (premult) \{\n            // Read beauty and mult by original alpha\n            float4 beauty = imBeauty();\n            output = output * beauty.w;\n\n            // If applying by the texture alpha, mult by that as well\n            if (useTextureAlpha) \{\n                float alpha = output.w;\n                output = output * alpha;\n                output.w = alpha;\n            \}\n        \}\n\n        // Write to the output\n        dst() = output;\n    \}\n\};"
   rebuild ""
   "Triplanar_Output Axis" {{parent.output_control}}
   "Triplanar_Global Rotate" {{parent.global_rotate_control}}
   "Triplanar_Blend Exponent" {{parent.blend_expo_control}}
   "Triplanar_Filter Mode" {{parent.sampling_control}}
-  "Triplanar_Anisotropic Filter Size" 8
   "Triplanar_X Axis Rotate" {{parent.x_axis_rotate_control}}
   "Triplanar_Y Axis Rotate" {{parent.y_axis_rotate_control}}
   "Triplanar_Z Axis Rotate" {{parent.z_axis_rotate_control}}
@@ -475,5 +491,11 @@ push 0
   name Output1
   xpos 70
   ypos 351
+ }
+ Axis2 {
+  inputs 0
+  name Axis_N
+  xpos 410
+  ypos 66
  }
 end_group

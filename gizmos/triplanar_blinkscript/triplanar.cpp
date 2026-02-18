@@ -21,7 +21,7 @@ kernel Triplanar : public ImageComputationKernel <ePixelWise> {
         // Blend and filtering params
         float blendExponent;
         int filterMode;
-        int anisotropicFilterSize;
+        int anisotropicSampleCount;
 
         // Per axis transform params
         float2 offsetX;
@@ -67,7 +67,7 @@ kernel Triplanar : public ImageComputationKernel <ePixelWise> {
 
         defineParam(blendExponent, "Blend Exponent", 1.0f);
         defineParam(filterMode, "Filter Mode", 0);
-        defineParam(anisotropicFilterSize, "Anisotropic Filter Size", 4);
+        defineParam(anisotropicSampleCount, "Anisotropic Samples", 8);
 
         defineParam(offsetX, "X Axis Translate", float2(0.0f, 0.0f));
         defineParam(angleX, "X Axis Rotate", 0.0f);
@@ -295,12 +295,12 @@ kernel Triplanar : public ImageComputationKernel <ePixelWise> {
         }
 
         // Calculate our step size, center offset, and initialize our output
-        float step = maxDerivative / (anisotropicFilterSize - 1);
-        float centerOffset = (anisotropicFilterSize - 1) * 0.5;
+        float step = maxDerivative / (anisotropicSampleCount - 1);
+        float centerOffset = (anisotropicSampleCount - 1) * 0.5;
         float4 result = float4(0.0f);
 
         // Step through our sample count and accumulate linear samples on each iteration, slowly moving in the direction of the offset 
-        for (int i = 0; i < anisotropicFilterSize; i++) {
+        for (int i = 0; i < anisotropicSampleCount; i++) {
             float offset = (i - centerOffset) * step;
             float2 sampleUV = uv + majorDir * offset;
             float4 sampleColor = float4(0.0f);
@@ -318,7 +318,7 @@ kernel Triplanar : public ImageComputationKernel <ePixelWise> {
         }
 
         // Normalize our result
-        return result / anisotropicFilterSize;
+        return result / anisotropicSampleCount;
     }
 
     // The actual kernel
